@@ -1,0 +1,53 @@
+<%- include("partials/header") -%>
+
+<h1>Registration</h1>
+<form id="reg-form" >
+    <input type="text" name="username" id="username" autocomplete="off" placeholder="Enter Username">
+    <input type="text" name="password" id="password" autocomplete="off" placeholder="Enter Password">
+    <input type="text" name="email" id="email" autocomplete="off" placeholder="Enter Email">
+    <input type="text" name="clgName" id="clgName" autocomplete="off" placeholder="Enter your College Name">
+    <button type="submit">Submit</button>
+</form>
+
+
+</div>
+<div class="footer-padding"></div>
+  <div class="footer">
+    <p>Made with ❤️ by Group 18</p>
+  </div>
+</div>
+
+<!-- <script src="./js/form.js"></script> -->
+<script>
+    const form =document.getElementById("reg-form")
+    form.addEventListener("submit", registerUser)
+
+    async function registerUser(event){
+        event.preventDefault()
+        const username = document.getElementById("username").value
+        const password = document.getElementById("password").value
+        const email = document.getElementById("email").value
+        const clgName = document.getElementById("clgName").value
+
+        const result = await fetch('/register' , {
+            method: 'POST',
+            headers:{
+                'Content-Type' : 'application/json'
+            },
+            body:JSON.stringify({
+                username,
+                password,
+                email,
+                clgName
+            })
+        }).then(res=>res.json());
+
+        console.log(result);
+        window.location="/login";
+
+
+
+    }
+</script>
+</body>
+</html>
